@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>서재 — LIFEVERSE</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#16213E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="app-header">
+    <div class="brand"><span class="dot">●</span> 서재</div>
+    <a class="navlink" href="index.html">← 오늘로</a>
+  </div>
+  <div id="app"></div>
+</div>
+
+<script src="engine/01-world-vocab.js"></script>
+
+<script>
+const CAT_COLOR = {
+  exercise: 'var(--c-exercise)', study: 'var(--c-study)', reading: 'var(--c-reading)',
+  certificate: 'var(--c-certificate)', language: 'var(--c-language)', health: 'var(--c-health)',
+  hobby: 'var(--c-hobby)', freegoal: 'var(--c-freegoal)',
+};
+function catInfo(id) { return CATEGORIES.find((c) => c.id === id) || { label: id, emoji: '📘' }; }
+function fmtRange(a, b) {
+  const f = (iso) => { const [y, m, d] = iso.split('-'); return parseInt(m) + '.' + parseInt(d); };
+  return f(a) + ' ~ ' + f(b);
+}
+
+function render() {
+  const app = document.getElementById('app');
+  let books = [];
+  try { books = JSON.parse(localStorage.getItem('lv_completedBooks') || '[]'); } catch (e) {}
+
+  if (books.length === 0) {
+    app.innerHTML = '';
+    const empty = document.createElement('div');
+    empty.className = 'empty-state';
+    empty.innerHTML = '<span class="emo">📚</span><p>아직 완결한 책이 없습니다.<br>첫 이야기를 완주하면 여기에 책이 놓입니다.</p>';
+    app.appendChild(empty);
+    return;
+  }
+
+  books.slice().reverse().forEach((b) => {
+    const cat = catInfo(b.categoryId);
+    const card = document.createElement('div');
+    card.className = 'book-card';
+    card.innerHTML =
+      '<div class="spine" style="background:' + (CAT_COLOR[b.categoryId] || 'var(--gold)') + ';"></div>' +
+      '<div class="info">' +
+        '<div class="title">' + cat.emoji + ' ' + escapeHtml(b.bookTitle) + '</div>' +
+        '<div class="meta">' + fmtRange(b.startDateIso, b.targetDateIso) + ' · ' + cat.label + ' · 페이지 ' + b.totalPages + '</div>' +
+        '<div class="badges">' +
+          '<span class="badge">' + (b.achieved ? '완주' : '중도 마감') + '</span>' +
+          '<span class="badge">활동 ' + b.activeDays + '일 · 휴식 ' + b.restDays + '일</span>' +
+          (b.purchase ? '<span class="badge paid">구매완료 · ' + (b.purchase.amount || 0).toLocaleString() + '원</span>' : '<span class="badge">미구매</span>') +
+        '</div>' +
+      '</div>';
+    app.appendChild(card);
+  });
+}
+function escapeHtml(s) {
+  const d = document.createElement('div'); d.textContent = s; return d.innerHTML;
+}
+render();
+</script>
+</body>
+</html>
