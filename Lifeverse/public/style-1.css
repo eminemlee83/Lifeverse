@@ -1,0 +1,184 @@
+/* ============================================================
+   LIFEVERSE — 공용 스타일
+   서명(signature) 요소: .story-page 뒤에 쌓이는 "페이지 그림자" —
+   스트릭이 길어질수록 카드 뒤에 쌓인 종이 층이 두꺼워 보이도록
+   JS에서 box-shadow를 계산해서 넣는다 (index.html의 renderStoryCard 참고).
+   ============================================================ */
+
+:root {
+  --navy-deep: #0F1626;
+  --navy: #16213E;
+  --navy-soft: #23315A;
+  --navy-line: #34426b;
+  --gold: #C9A227;
+  --gold-bright: #E8C468;
+  --paper: #FBF6EA;
+  --paper-line: #E8DCC0;
+  --ink: #2A2416;
+  --ink-soft: #756c56;
+  --danger: #C97B63;
+  --ok: #7C9473;
+
+  /* 8개 카테고리 색상 — 각 세계관의 배경(setting)에서 그대로 파생시켰다 */
+  --c-exercise: #6E8299;
+  --c-study: #8B7FA8;
+  --c-reading: #A8875E;
+  --c-certificate: #7A5C6E;
+  --c-language: #5C8A8A;
+  --c-health: #8C8579;
+  --c-hobby: #7C9473;
+  --c-freegoal: #A68A5B;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body {
+  margin: 0; padding: 0; background: var(--navy-deep); color: var(--ink);
+  font-family: 'Noto Sans CJK KR', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 20% -10%, #1c2b52 0%, var(--navy-deep) 60%);
+}
+
+.wrap { max-width: 480px; margin: 0 auto; padding: 20px 18px 56px; }
+
+/* ---------- 헤더 ---------- */
+.app-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 4px 2px 22px;
+}
+.app-header .brand {
+  color: #fff; font-weight: 700; font-size: 15px; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 8px;
+}
+.app-header .brand .dot { color: var(--gold); }
+.app-header a.navlink {
+  color: var(--gold-bright); font-size: 12.5px; text-decoration: none;
+  border: 1px solid rgba(232,196,104,0.35); border-radius: 20px; padding: 6px 13px;
+}
+
+/* ---------- 카드 공통 ---------- */
+.panel {
+  background: var(--navy-soft); border: 1px solid var(--navy-line); border-radius: 16px;
+  padding: 20px 18px; margin-bottom: 16px; color: #e8ecf6;
+}
+.panel h2 { margin: 0 0 6px; font-size: 16px; color: #fff; }
+.panel .sub { color: #aab4cf; font-size: 12.5px; margin-bottom: 14px; line-height: 1.6; }
+
+/* ---------- 시그니처: 스토리 페이지(종이 카드) ---------- */
+.story-page {
+  background: var(--paper); border-radius: 6px 6px 10px 10px;
+  padding: 26px 22px 22px; position: relative; margin: 6px 0 22px;
+  font-family: 'Noto Serif CJK KR', serif;
+}
+.story-page .seal {
+  position: absolute; top: -14px; right: 18px;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(155deg, var(--gold-bright), var(--gold));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Noto Sans CJK KR', sans-serif; font-weight: 700; font-size: 11px;
+  color: var(--navy-deep); box-shadow: 0 3px 8px rgba(0,0,0,0.35);
+  line-height: 1.15; text-align: center;
+}
+.story-page .ribbon {
+  position: absolute; top: 0; left: 26px; width: 14px; height: 34px;
+  background: var(--gold); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
+}
+.story-page .branch-tag {
+  display: inline-block; font-family: 'Noto Sans CJK KR', sans-serif; font-size: 9.5px;
+  font-weight: 700; color: var(--gold-deep, #8a6d1f); background: rgba(201,162,39,0.14);
+  border-radius: 10px; padding: 2px 9px; margin-bottom: 10px; letter-spacing: 0.3px;
+}
+.story-page .body-text {
+  font-size: 14.5px; line-height: 1.95; color: var(--ink); white-space: pre-line;
+}
+.story-page .memo-note {
+  margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--paper-line);
+  font-size: 12px; color: var(--ink-soft); font-family: 'Noto Sans CJK KR', sans-serif;
+}
+
+/* ---------- 폼 ---------- */
+label.field { display: block; margin-bottom: 14px; }
+label.field .lbl { display: block; font-size: 12.5px; color: #cdd6ef; margin-bottom: 6px; font-weight: 700; }
+input[type=text], input[type=date], select {
+  width: 100%; background: var(--navy-deep); border: 1px solid var(--navy-line);
+  color: #fff; border-radius: 10px; padding: 11px 12px; font-size: 14px;
+  font-family: 'Noto Sans CJK KR', sans-serif;
+}
+select { appearance: none; -webkit-appearance: none; }
+.cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 6px; }
+.cat-chip {
+  border: 1.5px solid var(--navy-line); border-radius: 12px; padding: 10px 4px;
+  text-align: center; font-size: 10.5px; color: #cdd6ef; background: var(--navy-deep);
+  cursor: pointer;
+}
+.cat-chip .emo { font-size: 18px; display: block; margin-bottom: 3px; }
+.cat-chip.active { border-color: var(--gold); background: rgba(201,162,39,0.14); color: #fff; }
+.dur-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.dur-chip {
+  border: 1.5px solid var(--navy-line); border-radius: 10px; padding: 9px 4px;
+  text-align: center; font-size: 12.5px; color: #cdd6ef; background: var(--navy-deep); cursor: pointer;
+}
+.dur-chip.active { border-color: var(--gold); background: rgba(201,162,39,0.14); color: #fff; }
+
+/* ---------- 버튼 ---------- */
+.btn {
+  display: block; width: 100%; text-align: center; border: none; border-radius: 12px;
+  padding: 14px; font-size: 14.5px; font-weight: 700; cursor: pointer;
+  font-family: 'Noto Sans CJK KR', sans-serif;
+}
+.btn-gold { background: linear-gradient(155deg, var(--gold-bright), var(--gold)); color: var(--navy-deep); }
+.btn-gold:disabled { opacity: 0.4; }
+.btn-ghost { background: transparent; border: 1.5px solid var(--navy-line); color: #cdd6ef; }
+.btn-rest { background: var(--navy-deep); border: 1.5px solid var(--navy-line); color: #9aa6c4; font-weight: 500; font-size: 13px; }
+.btn + .btn, .btn-row { margin-top: 10px; }
+
+/* ---------- 퀘스트 체크리스트 ---------- */
+.quest-item {
+  display: flex; align-items: center; gap: 12px; background: var(--navy-deep);
+  border: 1.5px solid var(--navy-line); border-radius: 12px; padding: 13px 14px; margin-bottom: 9px;
+  cursor: pointer;
+}
+.quest-item.checked { border-color: var(--gold); background: rgba(201,162,39,0.1); }
+.quest-item .box {
+  width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid var(--navy-line);
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--navy-deep);
+  font-size: 12px; font-weight: 700;
+}
+.quest-item.checked .box { background: var(--gold); border-color: var(--gold); }
+.quest-item .txt { font-size: 13.5px; color: #e8ecf6; }
+
+/* ---------- 스탯 ---------- */
+.stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0; }
+.stat-box { background: var(--navy-deep); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.stat-box .n { font-size: 19px; font-weight: 700; color: var(--gold-bright); }
+.stat-box .l { font-size: 10px; color: #9aa6c4; margin-top: 2px; }
+
+/* ---------- 배너 ---------- */
+.banner { border-radius: 12px; padding: 13px 15px; margin-bottom: 16px; font-size: 12.5px; line-height: 1.6; }
+.banner.ok { background: rgba(124,148,115,0.16); border: 1px solid rgba(124,148,115,0.4); color: #cfe0c9; }
+.banner.err { background: rgba(201,123,99,0.16); border: 1px solid rgba(201,123,99,0.4); color: #f0d3ca; }
+
+/* ---------- 서재(라이브러리) ---------- */
+.book-card {
+  display: flex; gap: 12px; background: var(--navy-soft); border: 1px solid var(--navy-line);
+  border-radius: 14px; padding: 14px; margin-bottom: 12px; text-decoration: none;
+}
+.book-card .spine { width: 8px; border-radius: 4px; flex-shrink: 0; }
+.book-card .info { flex: 1; }
+.book-card .title { color: #fff; font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+.book-card .meta { color: #9aa6c4; font-size: 11.5px; line-height: 1.6; }
+.book-card .badges { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
+.book-card .badge { font-size: 9.5px; padding: 2px 8px; border-radius: 8px; background: rgba(255,255,255,0.08); color: #cdd6ef; }
+.book-card .badge.paid { background: rgba(201,162,39,0.22); color: var(--gold-bright); }
+
+.empty-state { text-align: center; padding: 50px 20px; color: #9aa6c4; }
+.empty-state .emo { font-size: 38px; display: block; margin-bottom: 12px; }
+.empty-state p { font-size: 13px; line-height: 1.7; }
+
+textarea.memo {
+  width: 100%; background: var(--navy-deep); border: 1px solid var(--navy-line); color: #fff;
+  border-radius: 10px; padding: 10px 12px; font-size: 13px; font-family: 'Noto Sans CJK KR', sans-serif;
+  resize: vertical; min-height: 54px;
+}
