@@ -1,0 +1,513 @@
+/* ============================================================
+ * LIFEVERSE 스타일시트
+ * 모바일 우선 디자인, PWA 최적화
+ * ============================================================ */
+
+/* 색상 정의 */
+:root {
+  --primary: #16213E;
+  --accent: #D4AF37;
+  --accent-light: #E8DCC0;
+  --bg-dark: #0F1318;
+  --bg-light: #F5F5F5;
+  --text-primary: #222;
+  --text-secondary: #666;
+  --border: #DDD;
+  --success: #4CAF50;
+  --error: #F44336;
+  --rest-color: #B0BEC5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans CJK KR', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background: white;
+}
+
+body {
+  overflow: hidden;
+  position: fixed;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background: white;
+}
+
+/* ========== 헤더 ========== */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--primary);
+  color: white;
+  border-bottom: 2px solid var(--accent);
+  flex-shrink: 0;
+}
+
+.app-header .brand {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.app-header .dot {
+  color: var(--accent);
+  margin-right: 4px;
+}
+
+.app-header .navlink {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.app-header .navlink:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ========== 배너 ========== */
+#banner-slot {
+  flex-shrink: 0;
+}
+
+.banner {
+  padding: 12px 16px;
+  margin: 8px 8px 0;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.banner.err {
+  background: #FFEBEE;
+  color: #C62828;
+  border-left: 3px solid var(--error);
+}
+
+.banner.ok {
+  background: #E8F5E9;
+  color: #2E7D32;
+  border-left: 3px solid var(--success);
+}
+
+/* ========== 메인 컨텐츠 ========== */
+#app {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px 8px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.panel {
+  background: white;
+  border-radius: 8px;
+  padding: 20px 16px;
+  margin: 0 0 12px;
+  border: 1px solid var(--border);
+}
+
+.panel h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.panel .sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+/* ========== 폼 요소 ========== */
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.field .lbl {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.field input,
+.field textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-primary);
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+}
+
+.field textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* ========== 카테고리 그리드 ========== */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.cat-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 8px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 80px;
+}
+
+.cat-chip:active {
+  transform: scale(0.95);
+}
+
+.cat-chip.active {
+  border-color: var(--accent);
+  background: rgba(212, 175, 55, 0.08);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.cat-chip .emo {
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+
+.cat-chip {
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+/* ========== 기간 선택 ========== */
+.dur-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.dur-chip {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: white;
+}
+
+.dur-chip:active {
+  transform: scale(0.97);
+}
+
+.dur-chip.active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+}
+
+/* ========== 퀘스트 아이템 ========== */
+.quest-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 12px;
+  margin-bottom: 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: white;
+}
+
+.quest-item:active {
+  transform: scale(0.98);
+}
+
+.quest-item.checked {
+  background: rgba(76, 175, 80, 0.08);
+  border-color: var(--success);
+}
+
+.quest-item .box {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--success);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.quest-item.checked .box {
+  background: var(--success);
+  border-color: var(--success);
+  color: white;
+}
+
+.quest-item .txt {
+  font-size: 14px;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.memo {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ========== 버튼 ========== */
+.btn {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+  text-align: center;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-gold {
+  background: var(--accent);
+  color: var(--primary);
+  border: none;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+}
+
+.btn-gold:active:not(:disabled) {
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.5);
+}
+
+.btn-rest {
+  background: var(--rest-color);
+  color: white;
+  border: none;
+}
+
+.btn-rest:active:not(:disabled) {
+  opacity: 0.85;
+}
+
+.btn-ghost {
+  background: white;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.btn-ghost:active:not(:disabled) {
+  background: var(--bg-light);
+}
+
+/* ========== 통계 그리드 ========== */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.stat-box {
+  padding: 12px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-align: center;
+  background: var(--bg-light);
+}
+
+.stat-box .n {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.stat-box .l {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ========== 스토리 페이지 카드 ========== */
+.story-page {
+  position: relative;
+  background: linear-gradient(135deg, #FFF9F0 0%, #FFF5E6 100%);
+  border: 2px solid var(--accent-light);
+  border-radius: 4px;
+  padding: 24px 20px;
+  margin: 8px 0;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.story-page .ribbon {
+  position: absolute;
+  top: -1px;
+  left: 20px;
+  width: 60px;
+  height: 20px;
+  background: var(--accent);
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+  box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.story-page .seal {
+  position: absolute;
+  top: 16px;
+  right: 12px;
+  width: 56px;
+  height: 56px;
+  background: var(--primary);
+  color: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.story-page .branch-tag {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 4px 8px;
+  background: var(--accent);
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 3px;
+}
+
+.story-page .body-text {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: 'Georgia', 'Noto Serif CJK KR', serif;
+  margin-top: 20px;
+}
+
+/* ========== 반응형 ========== */
+@media (min-width: 480px) {
+  .cat-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .dur-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ========== 다크모드 (선택사항) ========== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-light: #1E1E1E;
+    --text-primary: #F0F0F0;
+    --text-secondary: #B0B0B0;
+    --border: #333;
+  }
+
+  body {
+    background: var(--bg-dark);
+  }
+
+  .panel,
+  .cat-chip,
+  .dur-chip,
+  .quest-item,
+  .btn-ghost {
+    background: #1E1E1E;
+    color: var(--text-primary);
+  }
+
+  .story-page {
+    background: linear-gradient(135deg, #2A2520 0%, #3A3530 100%);
+    border-color: rgba(212, 175, 55, 0.3);
+  }
+
+  .story-page .body-text {
+    color: var(--text-primary);
+  }
+}
+
+/* ========== 프린트 스타일 ========== */
+@media print {
+  .app-header,
+  .btn,
+  #banner-slot {
+    display: none;
+  }
+
+  .story-page {
+    page-break-inside: avoid;
+  }
+}
